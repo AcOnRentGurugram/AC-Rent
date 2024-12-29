@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import photo from "../assets/frame1.png";
+import bGcontact from "../assets/Product Image/bg contact us.jpg";
 
 
 const PrivacyPolicy: React.FC = () => {
@@ -102,9 +103,19 @@ const PrivacyPolicy: React.FC = () => {
         </section>
 
         {/* Call-to-Action Section */}
-        <section className="bg-primary text-white text-center p-6 rounded-lg shadow-md">
-          <h2 className="text-3xl font-bold mb-4">Stay Secure with Us</h2>
-          <p className="text-lg mb-6">
+        <section
+          className="bg-primary text-white text-center p-6 rounded-lg shadow-md"
+          style={{
+            backgroundImage: `url(${bGcontact})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <h2 className="text-black text-3xl font-bold mb-4">
+            Stay Secure with Us
+          </h2>
+          <p className="text-black text-lg mb-6">
             If you have questions about our Privacy Policy, feel free to contact
             us.
           </p>

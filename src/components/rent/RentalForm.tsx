@@ -14,6 +14,7 @@ export const RentalForm = ({ onSubmit }: RentalFormProps) => {
     email: "",
     phone: "",
     address: "",
+    quantity: "", // Added quantity field
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +61,20 @@ export const RentalForm = ({ onSubmit }: RentalFormProps) => {
           name="phone"
           required
           value={formData.phone}
+          onChange={handleInputChange}
+          className="mt-1.5"
+        />
+      </div>
+      <div>
+        <Label htmlFor="quantity">Quantity</Label>{" "}
+        {/* New input for quantity */}
+        <Input
+          id="quantity"
+          name="quantity"
+          type="number"
+          required
+          min="1"
+          value={formData.quantity}
           onChange={handleInputChange}
           className="mt-1.5"
         />
