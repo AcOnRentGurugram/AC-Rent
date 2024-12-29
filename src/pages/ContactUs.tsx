@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import photo from "../assets/frame1.png";
+import bGcontact from "../assets/Product Image/bg contact us.jpg";
 
 const ContactUs: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -148,12 +149,12 @@ const ContactUs: React.FC = () => {
               <li>
                 <strong>Address:</strong>{" "}
                 <a
-                  href="https://maps.google.com/?q=Sheetla+Colony,+Sector+34,+Gurugram,+Haryana+122001"
+                  href="https://maps.app.goo.gl/wPoCLe43kB94Pvqq8"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
                 >
-                  Sheetla Colony, Sector 34, Gurugram, Haryana 122001
+                  Sector 86, Gurugram, Haryana 122052
                 </a>
               </li>
             </ul>
@@ -161,7 +162,7 @@ const ContactUs: React.FC = () => {
             {/* Map */}
             <div className="mt-8 w-full h-64">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5589.221059051971!2d77.031283!3d28.480684!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d19affdd42471%3A0x44be7fe1aa62127f!2sIkrent!5e1!3m2!1sen!2sin!4v1735181258578!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.7514312422777!2d76.936514!3d28.399672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d3dedc3cc1b61%3A0x5475aefef924729e!2s83%2C%20Sector%2086%20Rd%2C%20Sector%2086%2C%20Gurugram%2C%20Haryana%20122052!5e1!3m2!1sen!2sin!4v1735450114520!5m2!1sen!2sin"
                 className="w-full h-full"
                 style={{ border: 0 }}
                 allowFullScreen={true}
@@ -173,11 +174,19 @@ const ContactUs: React.FC = () => {
         </section>
 
         {/* Call-to-Action Section */}
-        <section className="bg-primary text-white text-center p-6 rounded-lg shadow-md">
-          <h2 className="text-3xl font-bold mb-4">
+        <section
+          className="bg-primary text-white text-center p-6 rounded-lg shadow-md"
+          style={{
+            backgroundImage: `url(${bGcontact})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <h2 className="text-black text-3xl font-bold mb-4">
             Let's Connect and Build Together
           </h2>
-          <p className="text-lg mb-6">
+          <p className="text-black text-lg mb-6">
             Discover how AC On Rent Gurugram can help with your cooling needs.
           </p>
           <button
