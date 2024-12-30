@@ -42,19 +42,11 @@ const RentPage = () => {
   );
   const productImage = getProductImage(productId || "");
 
-  const handleDurationChange = (value: string) => {
-    setFormData({ ...formData, duration: value });
-  };
+  const handleDurationChange = (value) => setFormData({ ...formData, duration: value });
+  const handleVariantChange = (value) => setFormData({ ...formData, variant: value });
+  const handleMonthsChange = (value) => setFormData({ ...formData, months: value });
 
-  const handleVariantChange = (value: string) => {
-    setFormData({ ...formData, variant: value });
-  };
-
-  const handleMonthsChange = (value: string) => {
-    setFormData({ ...formData, months: value });
-  };
-
-  const handleFormSubmit = async (customerData: any) => {
+  const handleFormSubmit = async (customerData) => {
     const TELEGRAM_BOT_TOKEN = "7283866982:AAGtPqHG44IUYF_adh7OedrQ6qw98VSC0x8";
     const TELEGRAM_CHAT_ID = "1684000886";
 
@@ -119,6 +111,17 @@ Address: ${customerData.address}
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={productImage} />
+        
+        {/* Google Tag Manager */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11524510391"></script>
+        <script>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-11524510391');
+          `}
+        </script>
       </Helmet>
 
       <Navbar />
