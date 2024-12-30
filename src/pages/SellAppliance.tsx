@@ -61,7 +61,7 @@ const SellAppliance = () => {
       Description: ${applianceData.description}
     `;
     
-    const botToken = "8072679516:AAGeio5ucrKRLliFFq_o1oU15yjblkeRbHs";
+    const botToken = "7989221213:AAE5s16Y2y9Q9tmW7mhxihOUfELmOelIrlE";
     const chatId = "1684000886";
     
     const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;

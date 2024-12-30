@@ -55,7 +55,7 @@ const RentPage = () => {
   };
 
   const handleFormSubmit = async (customerData: any) => {
-    const TELEGRAM_BOT_TOKEN = "7549216853:AAHHWzqTmib1CvR5DFZH-zgqYCRakxM8vkc";
+    const TELEGRAM_BOT_TOKEN = "7283866982:AAGtPqHG44IUYF_adh7OedrQ6qw98VSC0x8";
     const TELEGRAM_CHAT_ID = "1684000886";
 
     const message = `
