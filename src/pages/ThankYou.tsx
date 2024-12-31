@@ -1,3 +1,10 @@
+// Declare global types to include gtag function
+declare global {
+  interface Window {
+    gtag: (command: string, eventName: string, params: Record<string, any>) => void;
+  }
+}
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -5,51 +12,30 @@ import { CheckCircle2 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
-// Declare global interface for window.dataLayer
-declare global {
-  interface Window {
-    dataLayer: any[];
-  }
-}
-
 const ThankYou = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Dynamically load gtag.js script
-    const script = document.createElement("script");
-    script.src = "https://www.googletagmanager.com/gtag/js?id=AW-11524510391";
-    script.async = true;
-    document.head.appendChild(script);
-
-    script.onload = () => {
-      // Initialize dataLayer and gtag
-      window.dataLayer = window.dataLayer || [];
-      function gtag(...args: any[]) {
-        window.dataLayer.push(args);
-      }
-
-      // Trigger conversion event
-      gtag("event", "conversion", {
-        send_to: "AW-11524510391/-DkSCP-Vyf4ZELelqPcq",
-        value: 2.0,
-        currency: "INR",
+    // Make sure gtag is available on window object
+    if (window.gtag) {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-11524510391/-DkSCP-Vyf4ZELelqPcq',  // Conversion ID
+        'value': 2.0,                                      // Conversion value
+        'currency': 'INR'                                  // Currency for the conversion
       });
-    };
+    } else {
+      console.error('Google Tag Manager gtag function is not available.');
+    }
 
-    // Redirect after 3 seconds
     const timer = setTimeout(() => {
-      navigate("/");
+      navigate('/');
     }, 3000);
 
-    return () => {
-      clearTimeout(timer);
-      document.head.removeChild(script); // Clean up the script to avoid duplicates
-    };
+    return () => clearTimeout(timer);
   }, [navigate]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 pt-10">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
       <main className="flex-grow flex items-center justify-center py-16 px-4">
         <motion.div
