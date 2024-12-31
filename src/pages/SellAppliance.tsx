@@ -62,7 +62,7 @@ const SellAppliance = () => {
     `;
     
     const botToken = "7989221213:AAE5s16Y2y9Q9tmW7mhxihOUfELmOelIrlE";
-    const chatId = "1684000886";
+    const chatId = "5167402315";
     
     const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
     
