@@ -1,7 +1,12 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -12,6 +17,7 @@ import { ProductSpecifications } from "@/components/rent/ProductSpecifications";
 import { SimilarProducts } from "@/components/rent/SimilarProducts";
 import { getProductImage } from "@/utils/productImages";
 import { getAvailableMonths, getPricing } from "@/utils/pricing";
+import ThankYou from "@/pages/ThankYou";
 
 const productVariants = {
   "window-ac": ["0.75 TON", "1.0 TON", "1.5 TON", "2.0 TON"],
@@ -25,7 +31,9 @@ const productVariants = {
 const RentPage = () => {
   const { productId } = useParams();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [formDialogOpen, setFormDialogOpen] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
   const [formData, setFormData] = useState({
     duration: "monthly",
     variant:
@@ -42,11 +50,7 @@ const RentPage = () => {
   );
   const productImage = getProductImage(productId || "");
 
-  const handleDurationChange = (value) => setFormData({ ...formData, duration: value });
-  const handleVariantChange = (value) => setFormData({ ...formData, variant: value });
-  const handleMonthsChange = (value) => setFormData({ ...formData, months: value });
-
-  const handleFormSubmit = async (customerData) => {
+  const handleFormSubmit = async (customerData: any) => {
     const TELEGRAM_BOT_TOKEN = "7283866982:AAGtPqHG44IUYF_adh7OedrQ6qw98VSC0x8";
     const TELEGRAM_CHAT_ID = "5167402315";
 
@@ -78,11 +82,8 @@ Address: ${customerData.address}
 
       if (!response.ok) throw new Error("Failed to send message to Telegram");
 
-      toast({
-        title: "Request Submitted Successfully!",
-        description: "We'll contact you shortly to confirm your rental.",
-      });
       setFormDialogOpen(false);
+      setShowThankYou(true);
     } catch (error) {
       console.error("Error sending message to Telegram:", error);
       toast({
@@ -93,35 +94,54 @@ Address: ${customerData.address}
     }
   };
 
-  const title = `Rent ${productId?.split("-").join(" ")} | Ac On Rent Gurugram`;
-  const description = `Rent a premium ${productId
-    ?.split("-")
-    .join(" ")} with flexible rental periods. Available in ${
-    formData.variant
-  } variant. Starting from ₹${currentPrice} per ${formData.duration}.`;
+  if (showThankYou) {
+    return <ThankYou />;
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
+        <title>
+          Rent {productId?.split("-").join(" ")} | Ac On Rent Gurugram
+        </title>
+        <meta
+          name="description"
+          content={`Rent a premium ${productId
+            ?.split("-")
+            .join(" ")} with flexible rental periods. Available in ${
+            formData.variant
+          } variant. Starting from ₹${currentPrice} per ${formData.duration}.`}
+        />
+        <meta
+          property="og:title"
+          content={`Rent ${productId
+            ?.split("-")
+            .join(" ")} | Ac On Rent Gurugram`}
+        />
+        <meta
+          property="og:description"
+          content={`Rent a premium ${productId
+            ?.split("-")
+            .join(" ")} with flexible rental periods. Available in ${
+            formData.variant
+          } variant. Starting from ₹${currentPrice} per ${formData.duration}.`}
+        />
         <meta property="og:image" content={productImage} />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
+        <meta
+          name="twitter:title"
+          content={`Rent ${productId
+            ?.split("-")
+            .join(" ")} | Ac On Rent Gurugram`}
+        />
+        <meta
+          name="twitter:description"
+          content={`Rent a premium ${productId
+            ?.split("-")
+            .join(" ")} with flexible rental periods. Available in ${
+            formData.variant
+          } variant. Starting from ₹${currentPrice} per ${formData.duration}.`}
+        />
         <meta name="twitter:image" content={productImage} />
-        
-        {/* Google Tag Manager */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11524510391"></script>
-        <script>
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-11524510391');
-          `}
-        </script>
       </Helmet>
 
       <Navbar />
@@ -142,11 +162,20 @@ Address: ${customerData.address}
                 duration={formData.duration}
                 variant={formData.variant}
                 currentPrice={currentPrice}
-                productVariants={productVariants[productId as keyof typeof productVariants] || []}
+                productVariants={
+                  productVariants[productId as keyof typeof productVariants] ||
+                  []
+                }
                 availableMonths={availableMonths}
-                onDurationChange={handleDurationChange}
-                onVariantChange={handleVariantChange}
-                onMonthsChange={handleMonthsChange}
+                onDurationChange={(value) =>
+                  setFormData({ ...formData, duration: value })
+                }
+                onVariantChange={(value) =>
+                  setFormData({ ...formData, variant: value })
+                }
+                onMonthsChange={(value) =>
+                  setFormData({ ...formData, months: value })
+                }
                 selectedMonths={formData.months}
                 onSubmitClick={() => setFormDialogOpen(true)}
               />
@@ -154,9 +183,9 @@ Address: ${customerData.address}
           </div>
 
           <ProductSpecifications productId={productId || ""} />
-          
-          <SimilarProducts 
-            currentProductId={productId || ""} 
+
+          <SimilarProducts
+            currentProductId={productId || ""}
             productVariants={productVariants}
           />
         </div>

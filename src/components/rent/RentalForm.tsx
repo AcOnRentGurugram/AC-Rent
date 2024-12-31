@@ -1,26 +1,21 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/use-toast";
 
 interface RentalFormProps {
   onSubmit: (formData: any) => void;
-  initialData?: {
-    name?: string;
-    email?: string;
-    phone?: string;
-    address?: string;
-    quantity?: number;
-  };
 }
 
-export const RentalForm = ({ onSubmit, initialData = {} }: RentalFormProps) => {
+export const RentalForm = ({ onSubmit }: RentalFormProps) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: initialData.name || "",
-    email: initialData.email || "",
-    phone: initialData.phone || "",
-    address: initialData.address || "",
-    quantity: initialData.quantity || "",
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,13 +25,14 @@ export const RentalForm = ({ onSubmit, initialData = {} }: RentalFormProps) => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    await onSubmit(formData);
+    navigate("/thank-you");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 shadow rounded-lg">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <Label htmlFor="name">Full Name</Label>
         <Input
@@ -45,7 +41,6 @@ export const RentalForm = ({ onSubmit, initialData = {} }: RentalFormProps) => {
           required
           value={formData.name}
           onChange={handleInputChange}
-          placeholder="Enter your full name"
           className="mt-1.5"
         />
       </div>
@@ -58,7 +53,6 @@ export const RentalForm = ({ onSubmit, initialData = {} }: RentalFormProps) => {
           required
           value={formData.email}
           onChange={handleInputChange}
-          placeholder="Enter your email"
           className="mt-1.5"
         />
       </div>
@@ -70,21 +64,6 @@ export const RentalForm = ({ onSubmit, initialData = {} }: RentalFormProps) => {
           required
           value={formData.phone}
           onChange={handleInputChange}
-          placeholder="Enter your phone number"
-          className="mt-1.5"
-        />
-      </div>
-      <div>
-        <Label htmlFor="quantity">Quantity</Label>
-        <Input
-          id="quantity"
-          name="quantity"
-          type="number"
-          required
-          min="1"
-          value={formData.quantity}
-          onChange={handleInputChange}
-          placeholder="Enter quantity"
           className="mt-1.5"
         />
       </div>
@@ -96,7 +75,6 @@ export const RentalForm = ({ onSubmit, initialData = {} }: RentalFormProps) => {
           required
           value={formData.address}
           onChange={handleInputChange}
-          placeholder="Enter your delivery address"
           className="mt-1.5"
         />
       </div>
