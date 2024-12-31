@@ -5,6 +5,7 @@ import { CheckCircle2 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
+// Declare global interface for window.dataLayer
 declare global {
   interface Window {
     dataLayer: any[];
@@ -15,20 +16,20 @@ const ThankYou = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Dynamically load gtag.js script
     const script = document.createElement("script");
     script.src = "https://www.googletagmanager.com/gtag/js?id=AW-11524510391";
     script.async = true;
     document.head.appendChild(script);
 
     script.onload = () => {
-      if (!window.dataLayer) {
-        window.dataLayer = [];
-      }
+      // Initialize dataLayer and gtag
+      window.dataLayer = window.dataLayer || [];
       function gtag(...args: any[]) {
         window.dataLayer.push(args);
       }
-      gtag("js", new Date());
-      gtag("config", "AW-11524510391");
+
+      // Trigger conversion event
       gtag("event", "conversion", {
         send_to: "AW-11524510391/-DkSCP-Vyf4ZELelqPcq",
         value: 2.0,
@@ -36,13 +37,14 @@ const ThankYou = () => {
       });
     };
 
+    // Redirect after 3 seconds
     const timer = setTimeout(() => {
       navigate("/");
     }, 3000);
 
     return () => {
       clearTimeout(timer);
-      document.head.removeChild(script);
+      document.head.removeChild(script); // Clean up the script to avoid duplicates
     };
   }, [navigate]);
 
