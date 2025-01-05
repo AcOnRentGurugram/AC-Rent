@@ -131,10 +131,10 @@ const ContactUs: React.FC = () => {
               <li>
                 <strong>Phone:</strong>{" "}
                 <a
-                  href="tel:+918800120156"
+                  href="tel:+919311677371"
                   className="hover:text-primary transition-colors"
                 >
-                  +91 8800120156
+                  +91 9311677371
                 </a>
               </li>
               <li>

@@ -138,16 +138,16 @@ export const Navbar = () => {
         <div className="flex items-center space-x-4">
           <div className="hidden md:flex items-center space-x-2 text-primary font-medium">
             <a
-              href="tel:+918800120156"
+              href="tel:+919311677371"
               className="hover:text-black flex items-center space-x-1"
             >
               <span>📞</span>
-              <span>+91-8800120156</span>
+              <span>+91-9311677371</span>
             </a>
           </div>
 
           <a
-            href="https://wa.me/+918800120156"
+            href="https://wa.me/+919311677371"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:block px-4 py-2 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition"
@@ -200,7 +200,7 @@ export const Navbar = () => {
                 Contact
               </Link>
               <a
-                href="https://wa.me/+918800120156"
+                href="https://wa.me/+919311677371"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block px-4 py-2 bg-green-500 text-white rounded-lg font-medium text-center"

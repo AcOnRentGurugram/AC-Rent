@@ -81,13 +81,13 @@ const Maintenance = () => {
           </p>
           <div className="flex justify-center gap-4">
             <a
-              href="tel:+918800120156"
+              href="tel:+919311677371"
               className="text-primary hover:underline"
             >
               📞 Call Now
             </a>
             <a
-              href="https://wa.me/+918800120156"
+              href="https://wa.me/+919311677371"
               className="text-green-500 hover:underline"
             >
               WhatsApp
