@@ -42,88 +42,154 @@ export const PricingSection = ({
     : `per ${selectedMonths} months`;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      className="w-full max-w-md mx-auto"
-    >
-      <Card className="bg-white shadow-lg">
-        <CardContent className="p-6 space-y-6">
-          <div className="flex items-center justify-between border-b pb-4">
-            <h2 className="text-2xl font-bold">Rental Options</h2>
-            <div className="text-right">
-              <p className="text-3xl font-bold text-primary">₹{currentPrice}</p>
-              <p className="text-sm text-muted-foreground">{priceLabel}</p>
+    <>
+      <style>
+        {`
+          .card {
+            background-color: #f4f0e8;
+            border-radius: 8px;
+          }
+          .variant {
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+          }
+          .variant:hover {
+            border-color: #555;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          }
+          .variant.selected {
+            border-color: #0055a4;
+            background-color: rgba(0, 85, 164, 0.1);
+            color: #0055a4;
+          }
+          .variant-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+          }
+          @media (max-width: 768px) {
+            .variant-grid {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+          @media (max-width: 480px) {
+            .variant-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+          .button {
+            background-color: #d32f2f;
+            color: white;
+            padding: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.2s ease-in-out;
+          }
+          .button:hover {
+            background-color: #b71c1c;
+          }
+        `}
+      </style>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="w-full max-w-md mx-auto"
+      >
+        <Card className="card shadow-lg">
+          <CardContent className="p-6 space-y-6">
+            <div className="flex items-center justify-between border-b pb-4">
+              <h2 className="text-2xl font-bold text-gray-800">
+                Rental Options
+              </h2>
+              <div className="text-right">
+                <p className="text-3xl font-bold text-gray-900">
+                  ₹{currentPrice}
+                </p>
+                <p className="text-sm text-gray-600">{priceLabel}</p>
+              </div>
             </div>
-          </div>
 
-          <div className="space-y-6">
-            <div>
-              <Label className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <Calendar className="h-4 w-4" /> Number of Months
-              </Label>
-              <Select onValueChange={onMonthsChange} value={selectedMonths}>
-                <SelectTrigger className="w-full">
-                  <SelectValue
-                    placeholder={`Select duration (min. ${startingMonth} months)`}
-                  />
-                </SelectTrigger>
-                <SelectContent className="bg-white text-gray-900">
-                  {availableMonths.map((month) => (
-                    <SelectItem key={month} value={month.toString()}>
-                      {month} months
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <p className="text-sm text-muted-foreground mt-2">
-                Choose rental duration to see final pricing
-              </p>
-            </div>
-            <div>
-              <Label className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <Package className="h-4 w-4" /> Capacity Variant
-              </Label>
-              <RadioGroup
-                value={variant}
-                onValueChange={onVariantChange}
-                className="grid grid-cols-3 gap-3"
-              >
-                {productVariants?.map((v) => (
-                  <div key={v}>
-                    <RadioGroupItem value={v} id={v} className="peer sr-only" />
-                    <Label
-                      htmlFor={v}
-                      className="flex flex-col items-center justify-between rounded-lg border-2 border-muted bg-white p-4 hover:bg-gray-50 peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all text-sm"
-                    >
-                      <span>{v}</span>
-                    </Label>
-                  </div>
-                ))}
-              </RadioGroup>
-              <p className="text-sm text-muted-foreground mt-2">
-                Please select a capacity variant to view pricing options
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <div className="text-sm text-muted-foreground space-y-1">
-                <p>• Refundable security deposit: ₹1,000</p>
-                <p>• All payments are due in advance on delivery</p>
-                <p>• Free maintenance covered for all rental products</p>
+            <div className="space-y-6">
+              <div>
+                <Label className="text-lg font-semibold mb-3 flex items-center gap-2 text-gray-800">
+                  <Calendar className="h-4 w-4 text-gray-600" /> Number of
+                  Months
+                </Label>
+                <Select onValueChange={onMonthsChange} value={selectedMonths}>
+                  <SelectTrigger className="w-full bg-white text-gray-800 border-gray-300 hover:border-gray-500 focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                    <SelectValue
+                      placeholder={`Select duration (min. ${startingMonth} months)`}
+                    />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white text-gray-800">
+                    {availableMonths.map((month) => (
+                      <SelectItem
+                        key={month}
+                        value={month.toString()}
+                        className="hover:bg-gray-100"
+                      >
+                        {month} months
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
-              <Button
-                onClick={onSubmitClick}
-                className="w-full py-5 text-base font-semibold"
-              >
-                Rent Now
-              </Button>
+              <div>
+                <Label className="text-lg font-semibold mb-3 flex items-center gap-2 text-gray-800">
+                  <Package className="h-4 w-4 text-gray-600" /> Capacity Variant
+                </Label>
+                <RadioGroup
+                  value={variant}
+                  onValueChange={onVariantChange}
+                  className="variant-grid"
+                >
+                  {productVariants?.map((v) => (
+                    <div key={v} className="w-full">
+                      <RadioGroupItem
+                        value={v}
+                        id={v}
+                        className="peer sr-only"
+                      />
+                      <Label
+                        htmlFor={v}
+                        className={`variant ${
+                          variant === v ? "selected" : ""
+                        } flex justify-center items-center`}
+                      >
+                        <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+                          {v}
+                        </span>
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </div>
+
+              <div className="space-y-3">
+                <div className="text-sm text-gray-600 space-y-1">
+                  <p>• Refundable security deposit: ₹2,000</p>
+                  <p>• Advance payment required on delivery</p>
+                  <p>• Complimenttary maintainance included</p>
+                </div>
+
+                <Button
+                  onClick={onSubmitClick}
+                  className="button w-full py-5 text-base font-semibold"
+                >
+                  Rent Now
+                </Button>
+              </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
-    </motion.div>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </>
   );
 };

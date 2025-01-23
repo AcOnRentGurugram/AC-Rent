@@ -3,12 +3,57 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Wrench, Phone, Clock, Shield } from "lucide-react";
+import { useState } from "react";
 
 const Maintenance = () => {
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    issue: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN";
+    const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID";
+
+    const message = `
+      New Maintenance Request:
+      - Name: ${formData.name}
+      - Phone: ${formData.phone}
+      - Issue: ${formData.issue}
+    `;
+
+    try {
+      await fetch(
+        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+          }),
+        }
+      );
+      alert("Request submitted successfully!");
+      setFormData({ name: "", phone: "", issue: "" });
+      setShowForm(false);
+    } catch (error) {
+      alert("Failed to send the request. Please try again.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
       <Helmet>
-        <title>Maintenance Services |Ac On Rent Gurugram</title>
+        <title>Maintenance Services | Ac On Rent Gurugram</title>
         <meta
           name="description"
           content="Professional maintenance services for all your appliances. 24/7 support, expert technicians, and comprehensive care."
@@ -80,10 +125,7 @@ const Maintenance = () => {
             Contact us for immediate assistance
           </p>
           <div className="flex justify-center gap-4">
-            <a
-              href="tel:+919311677371"
-              className="text-primary hover:underline"
-            >
+            <a href="tel:+919311677371" className="text-primary hover:underline">
               📞 Call Now
             </a>
             <a
@@ -93,7 +135,64 @@ const Maintenance = () => {
               WhatsApp
             </a>
           </div>
+          <button
+            onClick={() => setShowForm(true)}
+            className="bg-primary text-white py-2 px-6 rounded-md hover:bg-primary-hover"
+          >
+            Request Maintenance
+          </button>
         </div>
+
+        {showForm && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white p-6 rounded-lg w-full max-w-lg">
+              <h2 className="text-xl font-semibold mb-4">Maintenance Form</h2>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder="Your Name"
+                  className="w-full p-2 border rounded"
+                  required
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  placeholder="Phone Number"
+                  className="w-full p-2 border rounded"
+                  required
+                />
+                <textarea
+                  name="issue"
+                  value={formData.issue}
+                  onChange={handleInputChange}
+                  placeholder="Describe the issue"
+                  className="w-full p-2 border rounded"
+                  required
+                />
+                <div className="flex justify-between">
+                  <button
+                    type="button"
+                    onClick={() => setShowForm(false)}
+                    className="bg-gray-300 py-2 px-4 rounded hover:bg-gray-400"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-primary text-white py-2 px-4 rounded hover:bg-primary-hover"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </main>
 
       <Footer />

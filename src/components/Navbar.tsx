@@ -55,7 +55,7 @@ export const Navbar = () => {
             className="bg-green-600 hover:bg-green-700 text-white border-none"
           >
             <a
-              href="https://wa.me/+918800120156"
+              href="https://wa.me/+919311677371"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2"

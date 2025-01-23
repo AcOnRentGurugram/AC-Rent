@@ -79,7 +79,7 @@ export const RentalForm = ({ onSubmit }: RentalFormProps) => {
         />
       </div>
       <Button type="submit" className="w-full">
-        Confirm Rental Request
+        Submit 
       </Button>
     </form>
   );
