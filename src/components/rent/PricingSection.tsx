@@ -4,7 +4,13 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { Calendar, Package } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface PricingSectionProps {
   duration: string;
@@ -31,7 +37,7 @@ export const PricingSection = ({
   onSubmitClick,
 }: PricingSectionProps) => {
   const startingMonth = availableMonths[0];
-  const priceLabel = !selectedMonths 
+  const priceLabel = !selectedMonths
     ? `Starting from ${startingMonth} months`
     : `per ${selectedMonths} months`;
 
@@ -48,13 +54,33 @@ export const PricingSection = ({
             <h2 className="text-2xl font-bold">Rental Options</h2>
             <div className="text-right">
               <p className="text-3xl font-bold text-primary">₹{currentPrice}</p>
-              <p className="text-sm text-muted-foreground">
-                {priceLabel}
-              </p>
+              <p className="text-sm text-muted-foreground">{priceLabel}</p>
             </div>
           </div>
 
           <div className="space-y-6">
+            <div>
+              <Label className="text-lg font-semibold mb-3 flex items-center gap-2">
+                <Calendar className="h-4 w-4" /> Number of Months
+              </Label>
+              <Select onValueChange={onMonthsChange} value={selectedMonths}>
+                <SelectTrigger className="w-full">
+                  <SelectValue
+                    placeholder={`Select duration (min. ${startingMonth} months)`}
+                  />
+                </SelectTrigger>
+                <SelectContent className="bg-white text-gray-900">
+                  {availableMonths.map((month) => (
+                    <SelectItem key={month} value={month.toString()}>
+                      {month} months
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <p className="text-sm text-muted-foreground mt-2">
+                Choose rental duration to see final pricing
+              </p>
+            </div>
             <div>
               <Label className="text-lg font-semibold mb-3 flex items-center gap-2">
                 <Package className="h-4 w-4" /> Capacity Variant
@@ -81,39 +107,18 @@ export const PricingSection = ({
               </p>
             </div>
 
-            <div>
-              <Label className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <Calendar className="h-4 w-4" /> Number of Months
-              </Label>
-              <Select onValueChange={onMonthsChange} value={selectedMonths}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder={`Select duration (min. ${startingMonth} months)`} />
-                </SelectTrigger>
-                <SelectContent className="bg-white text-gray-900">
-                  {availableMonths.map((month) => (
-                    <SelectItem key={month} value={month.toString()}>
-                      {month} months
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <p className="text-sm text-muted-foreground mt-2">
-                Choose rental duration to see final pricing
-              </p>
-            </div>
-
             <div className="space-y-3">
               <div className="text-sm text-muted-foreground space-y-1">
                 <p>• Refundable security deposit: ₹1,000</p>
                 <p>• All payments are due in advance on delivery</p>
                 <p>• Free maintenance covered for all rental products</p>
               </div>
-              
-              <Button 
+
+              <Button
                 onClick={onSubmitClick}
                 className="w-full py-5 text-base font-semibold"
               >
-                Submit Rental Request
+                Rent Now
               </Button>
             </div>
           </div>

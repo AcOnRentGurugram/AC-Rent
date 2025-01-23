@@ -1,212 +1,127 @@
-import { Menu } from "lucide-react";
+import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { useState } from "react";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "./ui/navigation-menu";
+import { Button } from "@/components/ui/button";
 import logo from "/logo.png";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const navLinks = [
+    { title: "Home", path: "/" },
+    { title: "Window AC On Rent", path: "/rent/window-ac" },
+    { title: "Split AC On Rent", path: "/rent/split-ac" },
+    { title: "Oil Heater On Rent", path: "/rent/room-heater" },
+    { title: "Geyser On Rent", path: "/rent/geyser" },
+    { title: "Sell Your Old AC", path: "/sell" },
+  ];
+
   return (
-    <nav className="border-b bg-white shadow-md fixed top-0 left-0 w-full z-50">
-      <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+    <nav className="border-b bg-white shadow-lg fixed top-0 left-0 w-full z-50">
+      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <Link to="/" className="flex items-center">
-          <img src={logo} alt="Logo" className="h-20" />
+          <img src={logo} alt="Logo" className="h-16 md:h-20" />
         </Link>
 
-        <div className="hidden md:flex items-center space-x-8">
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <Link to="/" className="text-black hover:text-primary">
-                  Home
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>Products</NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white shadow-lg rounded-md">
-                  <div className="grid gap-3 p-4 w-[400px]">
-                    <NavigationMenuLink asChild>
-                      <Link
-                        to="/products"
-                        className="block p-2 hover:bg-muted rounded-md"
-                      >
-                        All Products
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        to="/rent/window-ac"
-                        className="block p-2 hover:bg-muted rounded-md"
-                      >
-                        Window AC
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        to="/rent/split-ac"
-                        className="block p-2 hover:bg-muted rounded-md"
-                      >
-                        Split AC
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        to="/rent/room-heater"
-                        className="block p-2 hover:bg-muted rounded-md"
-                      >
-                        Room Heaters
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        to="/rent/geyser"
-                        className="block p-2 hover:bg-muted rounded-md"
-                      >
-                        Geysers
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        to="/rent/refrigerator"
-                        className="block p-2 hover:bg-muted rounded-md"
-                      >
-                        Refrigerators
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        to="/rent/washing-machine"
-                        className="block p-2 hover:bg-muted rounded-md"
-                      >
-                        Washing Machines
-                      </Link>
-                    </NavigationMenuLink>
-                  </div>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>Services</NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white shadow-lg rounded-md">
-                  <div className="grid gap-3 p-4 w-[400px]">
-                    <NavigationMenuLink asChild>
-                      <Link
-                        to="/sell"
-                        className="block p-2 hover:bg-muted rounded-md"
-                      >
-                        Sell Your Old Used Ac Here
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        to="/maintenance"
-                        className="block p-2 hover:bg-muted rounded-md"
-                      >
-                        Maintenance
-                      </Link>
-                    </NavigationMenuLink>
-                  </div>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <Link
-                  to="/about"
-                  className="text-black hover:text-primary mr-6"
-                >
-                  About Us
-                </Link>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <Link to="/contact" className="text-black hover:text-primary">
-                  Contact
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-2">
+          {navLinks.map((link) => (
+            <Button
+              key={link.path}
+              variant="outline"
+              asChild
+              className="bg-white border-gray-200 text-gray-700 hover:bg-blue-50 hover:text-primary hover:border-primary transition-colors"
+            >
+              <Link to={link.path}>{link.title}</Link>
+            </Button>
+          ))}
         </div>
 
-        <div className="flex items-center space-x-4">
-          <div className="hidden md:flex items-center space-x-2 text-primary font-medium">
-            <a
-              href="tel:+919311677371"
-              className="hover:text-black flex items-center space-x-1"
-            >
-              <span>📞</span>
+        {/* Contact Buttons */}
+        <div className="hidden lg:flex items-center gap-3">
+          <Button
+            variant="outline"
+            asChild
+            className="bg-white border-gray-200"
+          >
+            <a href="tel:+919311677371" className="flex items-center gap-2">
+              <Phone className="h-4 w-4" />
               <span>+91-9311677371</span>
             </a>
-          </div>
+          </Button>
 
-          <a
-            href="https://wa.me/+919311677371"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:block px-4 py-2 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition"
+          <Button
+            asChild
+            className="bg-green-600 hover:bg-green-700 text-white border-none"
           >
-            WhatsApp Us
-          </a>
-
-          <button
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            <Menu className="h-6 w-6 text-black" />
-          </button>
+            <a
+              href="https://wa.me/+918800120156"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2"
+            >
+              <MessageCircle className="h-4 w-4" />
+              <span>WhatsApp</span>
+            </a>
+          </Button>
         </div>
 
+        {/* Mobile Menu Button */}
+        <Button
+          variant="outline"
+          className="lg:hidden"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
+        </Button>
+
+        {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="absolute top-20 left-0 w-full bg-white shadow-md p-4 md:hidden">
-            <div className="space-y-4">
-              <Link to="/" className="block text-black text-xl hover:underline">
-                Home
-              </Link>
-              <Link
-                to="/products"
-                className="block text-black text-xl hover:underline"
-              >
-                All Products
-              </Link>
-              <Link
-                to="/sell"
-                className="block text-black text-xl hover:underline"
-              >
-                Sell Your Old Used Ac Here
-              </Link>
-              <Link
-                to="/maintenance"
-                className="block text-black text-xl hover:underline"
-              >
-                Maintenance
-              </Link>
-              <Link
-                to="/about"
-                className="block text-black text-xl hover:underline"
-              >
-                About Us
-              </Link>
-              <Link
-                to="/contact"
-                className="block text-black text-xl hover:underline"
-              >
-                Contact
-              </Link>
-              <a
-                href="https://wa.me/+919311677371"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block px-4 py-2 bg-green-500 text-white rounded-lg font-medium text-center"
-              >
-                WhatsApp Us
-              </a>
+          <div className="absolute top-20 left-0 w-full bg-white shadow-lg lg:hidden">
+            <div className="p-4 space-y-2">
+              {navLinks.map((link) => (
+                <Button
+                  key={link.path}
+                  variant="outline"
+                  asChild
+                  className="w-full justify-start bg-white border-gray-200 text-gray-700 hover:bg-blue-50 hover:text-primary hover:border-primary"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <Link to={link.path}>{link.title}</Link>
+                </Button>
+              ))}
+
+              <div className="pt-4 space-y-2 border-t">
+                <Button
+                  variant="outline"
+                  asChild
+                  className="w-full justify-start bg-white border-gray-200"
+                >
+                  <a href="tel:+918800120156" className="flex items-center gap-2">
+                    <Phone className="h-4 w-4" />
+                    <span>+91-8800120156</span>
+                  </a>
+                </Button>
+
+                <Button
+                  asChild
+                  className="w-full bg-green-600 hover:bg-green-700 text-white border-none"
+                >
+                  <a
+                    href="https://wa.me/+918800120156"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 justify-center"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    <span>WhatsApp</span>
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         )}
