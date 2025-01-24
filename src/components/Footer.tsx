@@ -65,13 +65,13 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <PhoneCall className="h-4 w-4" />
-                <a href="tel:+919311677371" className="hover:text-[#0097b2]">
-                9311677371
+                <a href="tel:+918744982935" className="hover:text-[#0097b2]">
+                  8744982935
                 </a>
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />
-                Sector 86, Gurugram, Haryana 122052
+                Shop- 5&6, Hariram Complex, Main Branch Rd, Badshahpur, Sector 70, Gurugram, Haryana 122103
               </li>
             </ul>
           </div>

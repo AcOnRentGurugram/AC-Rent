@@ -131,10 +131,10 @@ const ContactUs: React.FC = () => {
               <li>
                 <strong>Phone:</strong>{" "}
                 <a
-                  href="tel:+919311677371"
+                  href="tel:+918744982935"
                   className="hover:text-primary transition-colors"
                 >
-                  +91 9311677371
+                  +91 8744982935
                 </a>
               </li>
               <li>
@@ -154,7 +154,8 @@ const ContactUs: React.FC = () => {
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
                 >
-                  Sector 86, Gurugram, Haryana 122052
+                  Shop- 5&6, Hariram Complex, Main Branch Rd, Badshahpur, Sector
+                  70, Gurugram, Haryana 122103
                 </a>
               </li>
             </ul>
