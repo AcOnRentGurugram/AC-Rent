@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import image from  "@/assets/main-image.jpg";
 
 export const Hero = () => {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ export const Hero = () => {
           >
             <div className="relative bg-gradient-to-b from-transparent to-secondary rounded-lg shadow-lg p-4">
               <img
-                src="https://images.pexels.com/photos/7347538/pexels-photo-7347538.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                src={image}
                 alt="Air Conditioner Offer"
                 className="w-full h-auto object-cover rounded-lg"
               />
