@@ -15,6 +15,7 @@ import PrivacyPolicy from "./pages/PrivacyPol.tsx";
 import Contact from "./pages/ContactUs.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
 import ThankYou from "./pages/ThankYou";
+import Return from "../src/pages/Return.tsx"
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/return" element={<Return />} />
         </Routes>
         <FloatingButton />
       </BrowserRouter>

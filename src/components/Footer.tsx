@@ -39,6 +39,11 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
+                <a href="/return" className="hover:text-[#0097b2]">
+                  Return Your Product
+                </a>
+              </li>
+              <li>
                 <a href="/about" className="hover:text-[#0097b2]">
                   About
                 </a>
@@ -71,7 +76,8 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />
-                Shop- 5&6, Hariram Complex, Main Branch Rd, Badshahpur, Sector 70, Gurugram, Haryana 122103
+                Shop- 5&6, Hariram Complex, Main Branch Rd, Badshahpur, Sector
+                70, Gurugram, Haryana 122103
               </li>
             </ul>
           </div>
