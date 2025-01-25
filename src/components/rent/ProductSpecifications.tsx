@@ -58,10 +58,10 @@ const specifications: Record<string, ProductSpecification> = {
       "Rotary compressor for efficient cooling",
     ],
     sizingGuide: [
-      "0.75 Ton: Suitable for up to 120 sq ft",
-      "1.0 Ton: Ideal for 120-180 sq ft",
-      "1.5 Ton: Perfect for 180-240 sq ft",
-      "2.0 Ton: Best for 240-400 sq ft",
+      "0.75 Ton: Suitable for up to 80 sq ft",
+      "1.0 Ton: Suitable for up to 100 sq ft",
+      "1.5 Ton: Suitable for up to 160 sq ft",
+      "2.0 Ton: Suitable for up to 200 sq ft",
     ],
     description: [
       "3 Star, 4 Star (+₹1,000), and 5 Star (+₹2,000) as per stock availability.",
@@ -74,19 +74,19 @@ const specifications: Record<string, ProductSpecification> = {
         content: [
           "The Rent, Security deposit and other charges (if any) has to be paid in full (one time) at the time of delivery or installation of AC.",
           "Mode of Payment: Google Pay, Phonepe, Paytm, UPI, IMPS, Net banking, Instant Bank transfer and Cash.",
-        ]
+        ],
       },
       {
         title: "Security Deposit",
         content: [
           "Security deposit Rs. 2,000/-(refundable) will be extra and it will be returned back at the time of pickup.",
-        ]
+        ],
       },
       {
         title: "Refund Policy",
         content: [
           "Rent amount is non refundable any time you return the rented products (Only Security amount is refundable).",
-        ]
+        ],
       },
       {
         title: "Delivery Policy",
@@ -94,32 +94,32 @@ const specifications: Record<string, ProductSpecification> = {
           "Customer or his/her representative has to be present at the agreed date and time for getting Items checked in good condition and it will be returned in the same condition strictly.",
           "Delivered items cannot be returned unless they have major defects & are non-functional. If the order is cancelled after the delivery of the item, Order cancellation charges Rs. 1000 have to be paid",
           "Please note that the Customer should ensure the entry of delivery vehicle inside the premises. Additionally, Customer has to arrange for the permission to use the lift. In case you do not have lift or permission to use lift at your premises, extra labor charges will be there to carry the items through stairs. If Customer himself wants to arrange the labor to carry the items through stairs he will have to bear any damage incurred during such shifting.",
-        ]
+        ],
       },
       {
         title: "Pick-Up Policy",
         content: [
           "Customer has to inform us minimum 1 week prior to pick-up the product.",
           "Pick-up date and time will be mutually decided by Renter and firm. Customer or his/her representative has to be present at the agreed date and time. Otherwise extra logistics cost incurred will be charged to the renter.",
-        ]
+        ],
       },
       {
         title: "Damage Policy",
         content: [
           "The Customer has to pay for any damage to, loss of, or any theft (disappearance) of products at its market value.",
-        ]
+        ],
       },
       {
         title: "Maintenance Policy",
         content: [
           "Repair and Maintenance of products will be on us/firm with free of cost (Only visit Charges Rs.100/200 are applicable as per distance during the entire season. This does not cover damages, breakdowns due to mishandling. Maintenance will be catered within 6-24 working hours.",
-        ]
+        ],
       },
       {
         title: "Shifting",
         content: [
           "It is not allowed to shift the rented item to another location. It is provided for the location where it will be delivered and installed. Please Note If the customer shifts it himself, the maintenance will be done by himself and the security amount will also be forfeited.",
-        ]
+        ],
       },
       {
         title: "General Terms",
@@ -130,8 +130,8 @@ const specifications: Record<string, ProductSpecification> = {
           "Sub meter charge Rs. 1000/-, if required.",
           "Power Requirement: AC 240V, 50Hz with pre installed power plug of 16 Amp near AC",
           "All the Electricity part and electrical fitting would be done at Customer's end only. Basic installation would be provided from our end. Extra wooden/other work would be at extra cost and need to take care by Customer only.",
-        ]
-      }
+        ],
+      },
     ],
     note: "All pictures shown are for illustration purpose. Actual product may vary.",
   },
