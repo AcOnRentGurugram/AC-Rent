@@ -1,3 +1,5 @@
+import { ref, push, set } from "firebase/database";
+import { db } from "../firebase-config";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
@@ -16,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OldAcBuying } from "@/components/sell/OldAcBuying";
+import { uploadBytes, ref as storageRef, getStorage } from "firebase/storage"; // Import necessary methods for Firebase Storage
 
 const SellAppliance = () => {
   const { toast } = useToast();
@@ -46,78 +49,34 @@ const SellAppliance = () => {
       description: formData.get("description"),
     };
 
-    // Format the message to send to Telegram
-    const message = `
-      New Appliance Listing:
-      Name: ${applianceData.name}
-      Phone: ${applianceData.phone}
-      Location: ${applianceData.location}
-      Appliance Type: ${applianceData.applianceType}
-      Brand: ${applianceData.brand}
-      Model: ${applianceData.model}
-      Age: ${applianceData.age} years
-      Condition: ${applianceData.condition}
-      Expected Price: ₹${applianceData.price}
-      Description: ${applianceData.description}
-    `;
-    
-    const botToken = "7989221213:AAE5s16Y2y9Q9tmW7mhxihOUfELmOelIrlE";
-    const chatId = "5167402315";
-    
-    const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    
-    // Send the message to Telegram
-    const response = await fetch(telegramApiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: message,
-      }),
-    });
-    
-    if (response.ok) {
-      // Now handle the image upload
-      if (images && images.length > 0) {
-        // Send each image one by one
-        for (let i = 0; i < images.length; i++) {
-          const image = images[i];
-          const formData = new FormData();
-          formData.append("photo", image);
-          formData.append("chat_id", chatId);
+    try {
+      // Reference to the appliances collection in Firebase
+      const applianceRef = ref(db, "applianceListings");
 
-          const photoResponse = await fetch(
-            `https://api.telegram.org/bot${botToken}/sendPhoto`,
-            {
-              method: "POST",
-              body: formData,
-            }
-          );
+      // Create a new appliance entry in Firebase
+      const newApplianceRef = push(applianceRef);
+      await set(newApplianceRef, applianceData);
 
-          if (!photoResponse.ok) {
-            toast({
-              title: "Error",
-              description: "There was an issue uploading the image.",
-            });
-          }
-        }
-      }
+      // Handle the image upload if there are images
 
+      // Display success message (using toast or another method)
       toast({
         title: "Success!",
-        description: "Your appliance listing has been submitted for review.",
+        description: "Your appliance listing has been submitted successfully.",
       });
+
+      // Reset the form
       (e.target as HTMLFormElement).reset();
-    } else {
+    } catch (error) {
+      console.error("Error submitting appliance data:", error);
       toast({
         title: "Error",
-        description: "There was an issue submitting your form.",
+        description:
+          "There was an issue submitting your form. Please try again.",
       });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   };
 
   return (
@@ -130,7 +89,9 @@ const SellAppliance = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-4xl font-bold mb-8 text-center">Sell Your Appliance</h1>
+            <h1 className="text-4xl font-bold mb-8 text-center">
+              Sell Your Appliance
+            </h1>
             <Card>
               <CardContent className="p-6">
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -138,7 +99,12 @@ const SellAppliance = () => {
                     {/* Name Field */}
                     <div>
                       <Label htmlFor="name">Your Name</Label>
-                      <Input name="name" id="name" placeholder="Enter your name" required />
+                      <Input
+                        name="name"
+                        id="name"
+                        placeholder="Enter your name"
+                        required
+                      />
                     </div>
 
                     {/* Phone Field */}
@@ -174,7 +140,9 @@ const SellAppliance = () => {
                         <SelectContent className="bg-white text-gray-900">
                           <SelectItem value="window-ac">Window AC</SelectItem>
                           <SelectItem value="split-ac">Split AC</SelectItem>
-                          <SelectItem value="portable-ac">Portable AC</SelectItem>
+                          <SelectItem value="portable-ac">
+                            Portable AC
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -182,13 +150,23 @@ const SellAppliance = () => {
                     {/* Brand Field */}
                     <div>
                       <Label htmlFor="brand">Brand</Label>
-                      <Input name="brand" id="brand" placeholder="Enter brand name" required />
+                      <Input
+                        name="brand"
+                        id="brand"
+                        placeholder="Enter brand name"
+                        required
+                      />
                     </div>
 
                     {/* Model Field */}
                     <div>
                       <Label htmlFor="model">Model</Label>
-                      <Input name="model" id="model" placeholder="Enter model number" required />
+                      <Input
+                        name="model"
+                        id="model"
+                        placeholder="Enter model number"
+                        required
+                      />
                     </div>
 
                     {/* Age Field */}
@@ -276,7 +254,7 @@ const SellAppliance = () => {
             </Card>
           </motion.div>
         </div>
-        
+
         {/* Old AC Buying Section */}
         <OldAcBuying />
       </main>

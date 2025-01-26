@@ -1,9 +1,11 @@
+import { db } from "../firebase-config"; // Firebase configuration
 import { Helmet } from "react-helmet";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Wrench, Phone, Clock, Shield } from "lucide-react";
 import { useState } from "react";
+import { ref, push, set } from "firebase/database";
 
 const Maintenance = () => {
   const [showForm, setShowForm] = useState(false);
@@ -20,33 +22,20 @@ const Maintenance = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN";
-    const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID";
-
-    const message = `
-      New Maintenance Request:
-      - Name: ${formData.name}
-      - Phone: ${formData.phone}
-      - Issue: ${formData.issue}
-    `;
 
     try {
-      await fetch(
-        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: message,
-          }),
-        }
-      );
-      alert("Request submitted successfully!");
-      setFormData({ name: "", phone: "", issue: "" });
-      setShowForm(false);
+      const requestRef = ref(db, "maintenanceRequests");
+      const newRequestRef = push(requestRef);
+      await set(newRequestRef, {
+        name: formData.name,
+        phone: formData.phone,
+        issue: formData.issue,
+        timestamp: Date.now(),
+      });
+      alert("Request successfully submitted!");
     } catch (error) {
-      alert("Failed to send the request. Please try again.");
+      console.error("Error:", error);
+      alert("Failed to save the request. Please try again.");
     }
   };
 

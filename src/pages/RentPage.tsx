@@ -1,5 +1,7 @@
+import { db } from "../firebase-config"; // Import the initialized Firebase app
+import { ref, push } from "firebase/database";
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import {
   Dialog,
@@ -31,7 +33,6 @@ const productVariants = {
 const RentPage = () => {
   const { productId } = useParams();
   const { toast } = useToast();
-  const navigate = useNavigate();
   const [formDialogOpen, setFormDialogOpen] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const [formData, setFormData] = useState({
@@ -50,42 +51,67 @@ const RentPage = () => {
   );
   const productImage = getProductImage(productId || "");
 
-  const handleFormSubmit = async (customerData: any) => {
-    const TELEGRAM_BOT_TOKEN = "7283866982:AAGtPqHG44IUYF_adh7OedrQ6qw98VSC0x8";
-    const TELEGRAM_CHAT_ID = "5167402315";
-
-    const message = `
-Rental Request:
-Product: ${productId}
-Variant: ${formData.variant}
-Duration: ${formData.duration}
-Months: ${formData.months}
-Price: ₹${currentPrice}
-Name: ${customerData.name}
-Email: ${customerData.email}
-Phone: ${customerData.phone}
-Address: ${customerData.address}
-    `;
-
+  const handleFormSubmit = async (customerData) => {
     try {
-      const response = await fetch(
-        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: message,
-          }),
-        }
-      );
+      // Firebase submission
+      const rentalRequestRef = ref(db, "rentalRequests");
+      await push(rentalRequestRef, {
+        name: customerData.name,
+        email: customerData.email,
+        phone: customerData.phone,
+        address: customerData.address,
+        productId: productId,
+        variant: formData.variant,
+        duration: formData.duration,
+        months: formData.months,
+        price: currentPrice,
+        timestamp: new Date().toISOString(),
+      });
 
-      if (!response.ok) throw new Error("Failed to send message to Telegram");
+      // Telegram submission
+      const botToken = "7283866982:AAGtPqHG44IUYF_adh7OedrQ6qw98VSC0x8";
+      const chatId = "5167402315";
+      const message = `
+  🆕 New Rental Request
+  
+  👤 Customer Details:
+  Name: ${customerData.name}
+  Email: ${customerData.email}
+  Phone: ${customerData.phone}
+  Address: ${customerData.address}
+  
+  📦 Product Details:
+  Product ID: ${productId}
+  Variant: ${formData.variant}
+  Duration: ${formData.duration}
+  Months: ${formData.months}
+  Price: ₹${currentPrice}
+  
+  ⏰ Timestamp: ${new Date().toLocaleString()}
+      `;
+
+      const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+      await fetch(telegramUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: "HTML",
+        }),
+      });
 
       setFormDialogOpen(false);
       setShowThankYou(true);
+
+      toast({
+        title: "Success",
+        description: "Your rental request has been submitted successfully!",
+      });
     } catch (error) {
-      console.error("Error sending message to Telegram:", error);
+      console.error("Error submitting data:", error);
       toast({
         title: "Submission Failed",
         description: "Unable to send your request. Please try again later.",

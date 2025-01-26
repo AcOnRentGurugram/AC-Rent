@@ -53,6 +53,11 @@ export const Footer = () => {
                   Contact
                 </a>
               </li>
+              <li>
+                <a href="/admin" className="hover:text-[#0097b2]">
+                  Admin
+                </a>
+              </li>
             </ul>
           </div>
 

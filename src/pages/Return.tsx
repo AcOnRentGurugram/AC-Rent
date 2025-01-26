@@ -1,3 +1,5 @@
+import { ref, push } from "firebase/database"; // Import Firebase methods
+import { db } from "../firebase-config"; // Your Firebase configuration file
 import { Helmet } from "react-helmet";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -22,30 +24,23 @@ const ProductReturn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN";
-    const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID";
 
-    const message = `
-      New Product Return Request:
-      - Name: ${formData.name}
-      - Phone: ${formData.phone}
-      - Address: ${formData.address}
-      - Product: ${formData.product}
-      - Reason: ${formData.reason}
-    `;
+    const formDataToSend = {
+      name: formData.name,
+      phone: formData.phone,
+      address: formData.address,
+      product: formData.product,
+      reason: formData.reason,
+      timestamp: Date.now(), // Add a timestamp for reference
+    };
 
     try {
-      await fetch(
-        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: message,
-          }),
-        }
-      );
+      // Reference the "productReturns" node in the Realtime Database
+      const productReturnsRef = ref(db, "productReturns");
+
+      // Push the form data to the database
+      await push(productReturnsRef, formDataToSend);
+
       alert("Request submitted successfully!");
       setFormData({
         name: "",
@@ -54,8 +49,9 @@ const ProductReturn = () => {
         product: "",
         reason: "",
       });
-      setShowForm(false);
+      setShowForm(false); // Optionally hide the form
     } catch (error) {
+      console.error("Error submitting the request:", error);
       alert("Failed to send the request. Please try again.");
     }
   };
