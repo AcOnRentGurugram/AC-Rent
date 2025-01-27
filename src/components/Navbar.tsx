@@ -12,9 +12,8 @@ export const Navbar = () => {
     { title: "Window AC On Rent", path: "/rent/window-ac" },
     { title: "Split AC On Rent", path: "/rent/split-ac" },
     { title: "Oil Heater On Rent", path: "/rent/room-heater" },
-    { title: "Geyser On Rent", path: "/rent/geyser" },
-    { title: "Sell Your Old AC", path: "/sell" },
-    { title: "Return", path: "/return" },
+    { title: "Maintenance", path: "/maintenance" },
+    { title: "Return Your Rented Product", path: "/return" },
   ];
 
   return (
