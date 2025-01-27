@@ -207,13 +207,12 @@ const RentPage = () => {
               />
             </div>
           </div>
-
-          <ProductSpecifications productId={productId || ""} />
-
           <SimilarProducts
             currentProductId={productId || ""}
             productVariants={productVariants}
           />
+
+          <ProductSpecifications productId={productId || ""} />
         </div>
       </main>
 

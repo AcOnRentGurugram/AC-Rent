@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import Split from "../assets/Product Image/Split AC.png";
-import WindowAC from "../assets/Product Image/Window Ac.png";
+import Split from "../assets/split ac 1.jpg";
+import WindowAC from "../assets/window ac 1.jpg";
 import RoomHeater from "../assets/Product Image/Room Heater2.png";
 import Fridge from "../assets/Product Image/Fridge1.png";
 import WashingMachine from "../assets/Product Image/Washing Mac.png";
@@ -73,7 +73,7 @@ export const FeaturedProducts = () => {
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      className="w-full h-full object-contain transition-transform duration-300 hover:scale-105"
                     />
                   </div>
                   <CardTitle className="text-xl font-semibold text-gray-800 mb-2">
