@@ -14,6 +14,7 @@ export const Navbar = () => {
     { title: "Oil Heater On Rent", path: "/rent/room-heater" },
     { title: "Geyser On Rent", path: "/rent/geyser" },
     { title: "Sell Your Old AC", path: "/sell" },
+    { title: "Return", path: "/return" },
   ];
 
   return (
