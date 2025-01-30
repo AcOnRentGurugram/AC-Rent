@@ -31,7 +31,8 @@ const productVariants = {
 };
 
 const RentPage = () => {
-  const { productId } = useParams();
+
+  const { productId } = useParams<{ productId: string }>();
   const { toast } = useToast();
   const [formDialogOpen, setFormDialogOpen] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
@@ -42,16 +43,23 @@ const RentPage = () => {
     months: "",
   });
 
+  // Ensure valid productId
+  if (!productId) {
+    console.error("Product ID is not defined!");
+    return <div className="text-center mt-20">Invalid Product ID</div>;
+  }
+
   const availableMonths = getAvailableMonths(productId || "", formData.variant);
   const currentPrice = getPricing(
-    productId || "",
+    productId,
     formData.duration,
     formData.variant,
     parseInt(formData.months) || availableMonths[0]
   );
-  const productImage = getProductImage(productId || "");
+  const productImage = getProductImage(productId);
 
-  const handleFormSubmit = async (customerData) => {
+
+  const handleFormSubmit = async (customerData: any) => {
     try {
       // Firebase submission
       const rentalRequestRef = ref(db, "rentalRequests");
@@ -69,8 +77,8 @@ const RentPage = () => {
       });
 
       // Telegram submission
-      const botToken = "7283866982:AAGtPqHG44IUYF_adh7OedrQ6qw98VSC0x8";
-      const chatId = "5167402315";
+      const botToken = "your_bot_token_here";
+      const chatId = "your_chat_id_here";
       const message = `
   🆕 New Rental Request
   
@@ -128,46 +136,17 @@ const RentPage = () => {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Helmet>
         <title>
-          Rent {productId?.split("-").join(" ")} | Ac On Rent Gurugram
+          Rent {productId.split("-").join(" ")} | Ac On Rent Gurugram
         </title>
         <meta
           name="description"
           content={`Rent a premium ${productId
-            ?.split("-")
+            .split("-")
             .join(" ")} with flexible rental periods. Available in ${
             formData.variant
           } variant. Starting from ₹${currentPrice} per ${formData.duration}.`}
         />
-        <meta
-          property="og:title"
-          content={`Rent ${productId
-            ?.split("-")
-            .join(" ")} | Ac On Rent Gurugram`}
-        />
-        <meta
-          property="og:description"
-          content={`Rent a premium ${productId
-            ?.split("-")
-            .join(" ")} with flexible rental periods. Available in ${
-            formData.variant
-          } variant. Starting from ₹${currentPrice} per ${formData.duration}.`}
-        />
-        <meta property="og:image" content={productImage} />
-        <meta
-          name="twitter:title"
-          content={`Rent ${productId
-            ?.split("-")
-            .join(" ")} | Ac On Rent Gurugram`}
-        />
-        <meta
-          name="twitter:description"
-          content={`Rent a premium ${productId
-            ?.split("-")
-            .join(" ")} with flexible rental periods. Available in ${
-            formData.variant
-          } variant. Starting from ₹${currentPrice} per ${formData.duration}.`}
-        />
-        <meta name="twitter:image" content={productImage} />
+        <meta property="og:title" content={`Rent ${productId}`} />
       </Helmet>
 
       <Navbar />
@@ -177,7 +156,7 @@ const RentPage = () => {
           <div className="grid lg:grid-cols-2 gap-8 items-start">
             <div className="lg:sticky lg:top-24">
               <ProductDisplay
-                productId={productId || ""}
+                productId={productId}
                 productImage={productImage}
                 variant={formData.variant}
               />
@@ -208,11 +187,12 @@ const RentPage = () => {
             </div>
           </div>
           <SimilarProducts
-            currentProductId={productId || ""}
+            currentProductId={productId}
             productVariants={productVariants}
           />
 
-          <ProductSpecifications productId={productId || ""} />
+          <ProductSpecifications productId={productId} />
+
         </div>
       </main>
 
@@ -229,5 +209,4 @@ const RentPage = () => {
     </div>
   );
 };
-
 export default RentPage;
