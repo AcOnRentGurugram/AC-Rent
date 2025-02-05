@@ -203,38 +203,23 @@ const specifications: Record<string, ProductSpecification> = {
           type: "Window AC",
           capacity: "1.0 Ton",
           rating: "3 Star",
-          price: "Rs. 7,000",
+          price: "Rs. 8,318",
         },
-        {
-          type: "Window AC",
-          capacity: "1.0 Ton",
-          rating: "5 Star",
-          price: "Rs. 10,000",
-        },
+    
         {
           type: "Window AC",
           capacity: "1.5 Ton",
           rating: "3 Star",
-          price: "Rs. 7,000",
+          price: "Rs. 8,414",
         },
-        {
-          type: "Window AC",
-          capacity: "1.5 Ton",
-          rating: "5 Star",
-          price: "Rs. 10,000",
-        },
+     
         {
           type: "Window AC",
           capacity: "2.0 Ton",
           rating: "3 Star",
-          price: "Rs. 9,000",
+          price: "Rs. 8,509",
         },
-        {
-          type: "Window AC",
-          capacity: "2.0 Ton",
-          rating: "5 Star",
-          price: "Rs. 11,000",
-        },
+     
       ],
     },
     description: [
@@ -265,7 +250,7 @@ const specifications: Record<string, ProductSpecification> = {
       {
         question: "What is the cost of Window AC rental in Gurgaon?",
         answer:
-          "Prices start from Rs. 7,000 per season for 1.0 Ton 3-Star Window AC.",
+          "Prices start from Rs. 8318 per season for 1.0 Ton 3-Star Window AC.",
       },
       {
         question: "Is installation included?",
@@ -375,37 +360,19 @@ const specifications: Record<string, ProductSpecification> = {
           type: "Window AC",
           capacity: "1.0 Ton",
           rating: "3 Star",
-          price: "Rs. 7,000",
-        },
-        {
-          type: "Window AC",
-          capacity: "1.0 Ton",
-          rating: "5 Star",
-          price: "Rs. 10,000",
+          price: "Rs. 8,318",
         },
         {
           type: "Window AC",
           capacity: "1.5 Ton",
           rating: "3 Star",
-          price: "Rs. 7,000",
-        },
-        {
-          type: "Window AC",
-          capacity: "1.5 Ton",
-          rating: "5 Star",
-          price: "Rs. 10,000",
+          price: "Rs. 8,414",
         },
         {
           type: "Window AC",
           capacity: "2.0 Ton",
           rating: "3 Star",
-          price: "Rs. 9,000",
-        },
-        {
-          type: "Window AC",
-          capacity: "2.0 Ton",
-          rating: "5 Star",
-          price: "Rs. 11,000",
+          price: "Rs. 8,509",
         },
       ],
       split: [
@@ -413,38 +380,23 @@ const specifications: Record<string, ProductSpecification> = {
           type: "Split AC",
           capacity: "1.0 Ton",
           rating: "3 Star",
-          price: "Rs. 12,000",
+          price: "Rs. 10,211",
         },
-        {
-          type: "Split AC",
-          capacity: "1.0 Ton",
-          rating: "5 Star",
-          price: "Rs. 14,000",
-        },
+     
         {
           type: "Split AC",
           capacity: "1.5 Ton",
           rating: "3 Star",
-          price: "Rs. 12,000",
+          price: "Rs. 10,922",
         },
-        {
-          type: "Split AC",
-          capacity: "1.5 Ton",
-          rating: "5 Star",
-          price: "Rs. 14,000",
-        },
+   
         {
           type: "Split AC",
           capacity: "2.0 Ton",
           rating: "3 Star",
-          price: "Rs. 14,000",
+          price: "Rs. 11,737",
         },
-        {
-          type: "Split AC",
-          capacity: "2.0 Ton",
-          rating: "5 Star",
-          price: "Rs. 15,000",
-        },
+    
       ],
     },
     typesOfAcAvailable: ["Window AC", "Split AC", "Portable AC", "Tower AC"],

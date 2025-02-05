@@ -29,9 +29,9 @@ export const SimilarProducts = ({ currentProductId, productVariants }: SimilarPr
                   <h3 className="text-lg font-semibold capitalize text-gray-900">
                     {p.split("-").join(" ")}
                   </h3>
-                  <p className="text-primary font-medium mt-2">
+                  {/* <p className="text-primary font-medium mt-2">
                     Starting from ₹{getPricing(p, "monthly", productVariants[p][0], 3)}/month
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </Link>

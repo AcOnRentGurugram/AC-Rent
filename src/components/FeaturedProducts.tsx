@@ -11,32 +11,32 @@ import Geyser from "../assets/Product Image/Geyser2.png";
 
 const products = [
   {
-    name: "Window AC",
+    name: "Window AC on Rent",
     description: "Advanced cooling technology with smart temperature control and energy optimization",
     image: WindowAC,
   },
   {
-    name: "Split AC",
+    name: "Split AC on Rent",
     description: "Premium comfort with intelligent climate control and whisper-quiet operation",
     image: Split,
   },
   {
-    name: "Room Heater",
-    description: "Advanced heating solutions with precision temperature control and safety features",
+    name: "Room Heater on Rent",
+    description: "Advanced heating solutions with precision temperature control and safety features - No Oxygen burning ",
     image: RoomHeater,
   },
   {
-    name: "Geyser",
+    name: "Geyser on Rent",
     description: "Smart water heating system with temperature precision and energy efficiency",
     image: Geyser,
   },
   {
-    name: "Washing Machine",
+    name: "Washing Machine on Rent",
     description: "Advanced laundry technology with intelligent wash programs and fabric care",
     image: WashingMachine,
   },
   {
-    name: "Refrigerator",
+    name: "Refrigerator on Rent",
     description: "Smart cooling technology with advanced temperature management system",
     image: Fridge,
   },
