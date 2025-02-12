@@ -11,31 +11,37 @@ import Geyser from "../assets/Product Image/Geyser2.png";
 
 const products = [
   {
+    url: "window-ac",
     name: "Window AC on Rent",
     description: "Advanced cooling technology with smart temperature control and energy optimization",
     image: WindowAC,
   },
   {
+     url: "split-ac",
     name: "Split AC on Rent",
     description: "Premium comfort with intelligent climate control and whisper-quiet operation",
     image: Split,
   },
   {
+    url: "room-heater",
     name: "Room Heater on Rent",
     description: "Advanced heating solutions with precision temperature control and safety features - No Oxygen burning ",
     image: RoomHeater,
   },
   {
+    url: "geyser",
     name: "Geyser on Rent",
     description: "Smart water heating system with temperature precision and energy efficiency",
     image: Geyser,
   },
   {
+    url: "washing-machine",
     name: "Washing Machine on Rent",
     description: "Advanced laundry technology with intelligent wash programs and fabric care",
     image: WashingMachine,
   },
   {
+    url: "Refrigerator",
     name: "Refrigerator on Rent",
     description: "Smart cooling technology with advanced temperature management system",
     image: Fridge,
@@ -86,7 +92,7 @@ export const FeaturedProducts = () => {
                   </p>
                   <Button 
                     className="w-full mt-6 py-2.5 text-sm font-medium bg-primary hover:bg-primary/90 text-white rounded-md transition-colors"
-                    onClick={() => navigate(`/rent/${product.name.toLowerCase().replace(' ', '-')}`)}
+                    onClick={() => navigate(`/rent/${product.url.toLowerCase().replace(' ', '-')}`)}
                   >
                     Rent Now
                   </Button>

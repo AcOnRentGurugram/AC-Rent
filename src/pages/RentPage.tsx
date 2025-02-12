@@ -77,8 +77,8 @@ const RentPage = () => {
       });
 
       // Telegram submission
-      const botToken = "your_bot_token_here";
-      const chatId = "your_chat_id_here";
+      const botToken = "7890027454:AAH9eCTnijNXPuR701y0NfdcrEw6lfuIfqk";
+      const chatId = "1684000886";
       const message = `
   🆕 New Rental Request
   

@@ -1,7 +1,14 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
-import { CheckCircle, Ruler, Zap, Shield, Info, AlertCircle } from "lucide-react";
+import {
+  CheckCircle,
+  Ruler,
+  Zap,
+  Shield,
+  Info,
+  AlertCircle,
+} from "lucide-react";
 
 export interface PricingInfo {
   type: string;
@@ -34,6 +41,10 @@ export interface ProductSpecification {
   faqs?: {
     question: string;
     answer: string;
+  }[];
+  Checklist?: {
+    title: string;
+    content: string[];
   }[];
 }
 
@@ -171,6 +182,80 @@ const specifications: Record<string, ProductSpecification> = {
         ],
       },
     ],
+    faqs: [
+      {
+        question: "What safety features do the heaters have?",
+        answer:
+          "Our heaters come with tilt switches, overheat protection, and thermostatic heat control for enhanced safety.",
+      },
+      {
+        question: "What are the rental terms for the heaters?",
+        answer:
+          "You can rent heaters for a minimum of one month. Longer rental periods are also available with flexible terms.",
+      },
+      {
+        question: "How is the heater delivered and installed?",
+        answer:
+          "The heater will be delivered to your specified location. Basic installation and setup are provided.",
+      },
+      {
+        question: "Is there a security deposit required?",
+        answer:
+          "Yes, a refundable security deposit of Rs. 2,000 is required, which will be returned at the time of product pick-up.",
+      },
+      {
+        question: "Can I extend the rental period?",
+        answer:
+          "Yes, you can extend your rental period by contacting our support team at least 3 days before the end of the current term.",
+      },
+      {
+        question:
+          "What happens if the heater is damaged during the rental period?",
+        answer:
+          "You will be responsible for any damage or loss. The cost of repair or replacement will be deducted from the security deposit.",
+      },
+      {
+        question: "Do you provide maintenance during the rental period?",
+        answer:
+          "Yes, we offer maintenance and repair services during the rental period. However, visit charges may apply depending on your location.",
+      },
+      {
+        question: "What is the procedure for returning the heater?",
+        answer:
+          "Inform us at least one week in advance to arrange a pick-up date and time. Ensure the heater is in good condition for pick-up.",
+      },
+      {
+        question: "Can I cancel my order after delivery?",
+        answer:
+          "Yes, but a cancellation fee of Rs. 1,000 will be applied if the cancellation occurs after the delivery of the heater.",
+      },
+      {
+        question:
+          "Are there any additional charges for moving the heater to another room or location?",
+        answer:
+          "Shifting the heater to another location is not allowed. Moving it yourself may void the maintenance coverage and forfeit the security deposit.",
+      },
+    ],
+    Checklist: [
+      {
+        title: "Things to Consider Before Renting a Heater",
+        content: [
+          "Rent the heater only from trusted and verified dealers.",
+          "Check that the heater is functioning properly before delivery or installation.",
+          "Discuss maintenance terms, including frequency of inspections and service response times.",
+          "Ensure the heater has advanced safety features such as tip-over protection and overheat protection.",
+          "Look for a heater with energy efficiency and low power consumption to save on electricity bills.",
+          "Choose the right size heater based on the room's square footage.",
+          "Ask about installation or setup costs and ensure clear instructions are provided.",
+          "Ensure you receive a list of documents required to rent the heater.",
+          "Negotiate flexible rental terms, including tenure and pricing plans.",
+          "Inquire about different types of heaters available, such as oil-filled or fan heaters.",
+          "Carefully review the rental terms and conditions before signing the agreement.",
+          "Request information about the rent renewal and deposit refund policies.",
+        ],
+      },
+    ],
+
     note: "All pictures shown are for illustration purpose. Actual product may vary.",
   },
 
@@ -205,21 +290,20 @@ const specifications: Record<string, ProductSpecification> = {
           rating: "3 Star",
           price: "Rs. 8,318",
         },
-    
+
         {
           type: "Window AC",
           capacity: "1.5 Ton",
           rating: "3 Star",
           price: "Rs. 8,414",
         },
-     
+
         {
           type: "Window AC",
           capacity: "2.0 Ton",
           rating: "3 Star",
           price: "Rs. 8,509",
         },
-     
       ],
     },
     description: [
@@ -232,6 +316,11 @@ const specifications: Record<string, ProductSpecification> = {
       "Cost-Effective: Renting an AC is more affordable than buying one outright.",
       "Free Delivery & Installation: Enjoy free delivery and installation services.",
       "Stress-Free Returns: If you no longer need the AC, return it and get your deposit back.",
+      "Technical Support: If any issues arise, the rental company will provide free repairs or replacement services.",
+      "No Transportation Problem: Ideal for people who move frequently, avoiding the hassle of transporting an AC.",
+      "Energy-Efficient Options: Choose from high-efficiency ACs to save on electricity bills.",
+      "Variety of Options: Access different AC types, capacities, and brands to suit your needs.",
+      "Flexible Rental Plans: Customize rental periods and payment plans to fit your requirements.",
     ],
     serviceAreas: [
       "Sector 1",
@@ -250,17 +339,50 @@ const specifications: Record<string, ProductSpecification> = {
       {
         question: "What is the cost of Window AC rental in Gurgaon?",
         answer:
-          "Prices start from Rs. 8318 per season for 1.0 Ton 3-Star Window AC.",
+          "Prices start from Rs. 8,318 per season for a 1.0 Ton 3-Star Window AC.",
       },
       {
-        question: "Is installation included?",
+        question: "How much does Air Conditioner rental in Gurgaon cost?",
         answer:
-          "Yes, professional installation is included in the rental package.",
+          "The approximate cost of availing an AC on rent in Gurgaon is Rs. 6,500 to Rs. 15,000 per season, depending on the type and capacity.",
       },
       {
-        question: "What about maintenance?",
+        question: "Is installation included with AC rentals?",
         answer:
-          "We provide complete maintenance support with only nominal visit charges applicable.",
+          "Yes, professional installation is included in the rental package at no extra cost.",
+      },
+      {
+        question:
+          "What types of Air Conditioners are available for rent in Gurgaon?",
+        answer:
+          "You can rent Split AC, Window AC, and Tower AC in Gurgaon, depending on your cooling needs.",
+      },
+      {
+        question: "What should be done if the hired AC stops working?",
+        answer:
+          "Contact the AC rental company immediately. A technician will be sent to your location to either fix the issue or replace the AC.",
+      },
+      {
+        question: "Do AC rental companies charge for relocating the AC?",
+        answer:
+          "AC rental companies typically do not charge any fee for relocating the AC within the same premises. However, confirm with the company before making any arrangements.",
+      },
+      {
+        question: "What about maintenance for rented ACs?",
+        answer:
+          "Complete maintenance support is provided, with nominal visit charges applicable depending on your location and service needs.",
+      },
+      {
+        question:
+          "Is there a minimum rental period for hiring Window or Split ACs?",
+        answer:
+          "Yes, most companies have a minimum rental period. Please check with the rental company for specific details, as it varies from company to company.",
+      },
+      {
+        question:
+          "Does AC on rent in Gurgaon include AC installation services?",
+        answer:
+          "Yes, AC rental companies in Gurgaon generally offer free air conditioner installation services as part of the rental package.",
       },
     ],
     termsAndConditions: [
@@ -328,6 +450,26 @@ const specifications: Record<string, ProductSpecification> = {
         ],
       },
     ],
+    Checklist: [
+      {
+        title: "Things to Consider Before Renting an AC",
+        content: [
+          "You can rent the AC only from trusted and verified dealers.",
+          "Make sure that the AC is functioning properly before installing it.",
+          "Discussion on maintenance issues.",
+          "Your owner should provide you with the highest quality stabilizer.",
+          "Look for an AC with higher efficiency and low power consumption.",
+          "Choose the right size of air conditioner for the room.",
+          "Ask questions about the installation costs with the dealer.",
+          "Find a complete list of documents that are required to hire the AC.",
+          "Negotiate the best plans about rental tenure and charges for hiring.",
+          "Ask about the different available brands, capacity options, and unit types.",
+          "Be sure to read the terms and conditions.",
+          "Request information about the rent renewal policy as well as deposit policies.",
+        ],
+      },
+    ],
+
     note: "All pictures shown are for illustration purpose. Actual product may vary.",
   },
 
@@ -382,21 +524,20 @@ const specifications: Record<string, ProductSpecification> = {
           rating: "3 Star",
           price: "Rs. 10,211",
         },
-     
+
         {
           type: "Split AC",
           capacity: "1.5 Ton",
           rating: "3 Star",
           price: "Rs. 10,922",
         },
-   
+
         {
           type: "Split AC",
           capacity: "2.0 Ton",
           rating: "3 Star",
           price: "Rs. 11,737",
         },
-    
       ],
     },
     typesOfAcAvailable: ["Window AC", "Split AC", "Portable AC", "Tower AC"],
@@ -405,6 +546,11 @@ const specifications: Record<string, ProductSpecification> = {
       "Cost-Effective: Renting an AC is more affordable than buying one outright.",
       "Free Delivery & Installation: Enjoy free delivery and installation services.",
       "Stress-Free Returns: If you no longer need the AC, return it and get your deposit back.",
+      "Technical Support: If any issues arise, the rental company will provide free repairs or replacement services.",
+      "No Transportation Problem: Ideal for people who move frequently, avoiding the hassle of transporting an AC.",
+      "Energy-Efficient Options: Choose from high-efficiency ACs to save on electricity bills.",
+      "Variety of Options: Access different AC types, capacities, and brands to suit your needs.",
+      "Flexible Rental Plans: Customize rental periods and payment plans to fit your requirements.",
     ],
     serviceAreas: [
       "Sector 1",
@@ -438,6 +584,48 @@ const specifications: Record<string, ProductSpecification> = {
         question: "Is there a minimum rental period?",
         answer:
           "Rental periods vary by company. Contact your provider for specific details.",
+      },
+      {
+        question: "Do AC rental companies charge for relocating the AC?",
+        answer:
+          "Most companies do not charge for relocating the AC within the same premises, but confirm with the rental company for their policy.",
+      },
+      {
+        question:
+          "What types of Air Conditioners are available for rent in Gurgaon?",
+        answer:
+          "You can rent Split AC, Window AC, and Tower AC, depending on your needs and preferences.",
+      },
+      {
+        question: "Does AC rental include maintenance services?",
+        answer:
+          "Yes, regular maintenance is provided. However, visit charges may apply based on your location.",
+      },
+      {
+        question: "How long does it take for AC installation after booking?",
+        answer:
+          "Most companies install the AC within 24 to 48 hours after confirming the booking.",
+      },
+      {
+        question: "Is a security deposit required?",
+        answer:
+          "Yes, most companies require a refundable security deposit, which is returned at the end of the rental period if the AC is in good condition.",
+      },
+      {
+        question: "Can I extend my rental period?",
+        answer:
+          "Yes, rental periods can be extended by contacting the company in advance and arranging the extension.",
+      },
+      {
+        question: "What payment methods are accepted for AC rentals?",
+        answer:
+          "Payment methods typically include Google Pay, PhonePe, Paytm, UPI, IMPS, Net banking, instant bank transfers, and cash.",
+      },
+      {
+        question:
+          "Are there any charges for canceling the order after delivery?",
+        answer:
+          "Yes, order cancellation charges may apply after delivery. Check with your rental company for their specific cancellation policy.",
       },
     ],
     description: [
@@ -510,6 +698,25 @@ const specifications: Record<string, ProductSpecification> = {
         ],
       },
     ],
+    Checklist: [
+      {
+        title: "Things to Consider Before Renting an AC",
+        content: [
+          "You can rent the AC only from trusted and verified dealers.",
+          "Make sure that the AC is functioning properly before installing it.",
+          "Discussion on maintenance issues.",
+          "Your owner should provide you with the highest quality stabilizer.",
+          "Look for an AC with higher efficiency and low power consumption.",
+          "Choose the right size of air conditioner for the room.",
+          "Ask questions about the installation costs with the dealer.",
+          "Find a complete list of documents that are required to hire the AC.",
+          "Negotiate the best plans about rental tenure and charges for hiring.",
+          "Ask about the different available brands, capacity options, and unit types.",
+          "Be sure to read the terms and conditions.",
+          "Request information about the rent renewal policy as well as deposit policies.",
+        ],
+      },
+    ],
     note: "All pictures shown are for illustration purpose. Actual product may vary.",
   },
 };
@@ -520,9 +727,13 @@ export const ProductSpecifications: React.FC<ProductSpecificationsProps> = ({
 
   if (!productId || !productSpecs) return null;
 
-  const SectionIcon = ({ icon: Icon, className }: { icon: React.ElementType; className?: string }) => (
-    <Icon className={`w-5 h-5 mr-2 ${className}`} />
-  );
+  const SectionIcon = ({
+    icon: Icon,
+    className,
+  }: {
+    icon: React.ElementType;
+    className?: string;
+  }) => <Icon className={`w-5 h-5 mr-2 ${className}`} />;
 
   return (
     <motion.div
@@ -555,11 +766,16 @@ export const ProductSpecifications: React.FC<ProductSpecificationsProps> = ({
                 <div className="bg-blue-50 p-6 rounded-xl">
                   <div className="flex items-center mb-4">
                     <SectionIcon icon={Zap} className="text-blue-600" />
-                    <h3 className="text-xl font-semibold text-gray-900">Key Highlights</h3>
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      Key Highlights
+                    </h3>
                   </div>
                   <ul className="space-y-3">
                     {productSpecs.highlights.map((highlight, index) => (
-                      <li key={index} className="flex items-start text-gray-700">
+                      <li
+                        key={index}
+                        className="flex items-start text-gray-700"
+                      >
                         <CheckCircle className="w-4 h-4 mr-2 mt-1 text-green-600" />
                         <span>{highlight}</span>
                       </li>
@@ -572,12 +788,20 @@ export const ProductSpecifications: React.FC<ProductSpecificationsProps> = ({
               {productSpecs.features && (
                 <div className="bg-green-50 p-6 rounded-xl">
                   <div className="flex items-center mb-4">
-                    <SectionIcon icon={CheckCircle} className="text-green-600" />
-                    <h3 className="text-xl font-semibold text-gray-900">Main Features</h3>
+                    <SectionIcon
+                      icon={CheckCircle}
+                      className="text-green-600"
+                    />
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      Main Features
+                    </h3>
                   </div>
                   <ul className="space-y-3">
                     {productSpecs.features.map((feature, index) => (
-                      <li key={index} className="flex items-start text-gray-700">
+                      <li
+                        key={index}
+                        className="flex items-start text-gray-700"
+                      >
                         <span className="mr-2">✓</span>
                         {feature}
                       </li>
@@ -591,12 +815,15 @@ export const ProductSpecifications: React.FC<ProductSpecificationsProps> = ({
                 <div className="bg-purple-50 p-6 rounded-xl">
                   <div className="flex items-center mb-4">
                     <SectionIcon icon={Ruler} className="text-purple-600" />
-                    <h3 className="text-xl font-semibold text-gray-900">Size Recommendations</h3>
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      Size Recommendations
+                    </h3>
                   </div>
                   <ul className="space-y-3">
                     {productSpecs.sizingGuide.map((size, index) => (
                       <li key={index} className="text-gray-700">
-                        <span className="font-medium text-purple-600">•</span> {size}
+                        <span className="font-medium text-purple-600">•</span>{" "}
+                        {size}
                       </li>
                     ))}
                   </ul>
@@ -609,29 +836,40 @@ export const ProductSpecifications: React.FC<ProductSpecificationsProps> = ({
               <div className="bg-white border rounded-xl p-8 shadow-sm">
                 <div className="flex items-center mb-8">
                   <SectionIcon icon={Zap} className="text-red-600" />
-                  <h3 className="text-2xl font-bold text-gray-900">Pricing Details</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    Pricing Details
+                  </h3>
                 </div>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {Object.entries(productSpecs.pricing).map(([category, prices]) => (
-                    <div key={category} className="border p-6 rounded-lg">
-                      <h4 className="text-lg font-semibold mb-4 capitalize border-b pb-2">
-                        {category.replace(/([A-Z])/g, ' $1')}
-                      </h4>
-                      <div className="space-y-4">
-                        {prices.map((item, index) => (
-                          <div key={index} className="flex justify-between items-center">
-                            <div>
-                              <p className="font-medium text-gray-800">{item.capacity}</p>
-                              <p className="text-sm text-gray-500">{item.rating}</p>
+                  {Object.entries(productSpecs.pricing).map(
+                    ([category, prices]) => (
+                      <div key={category} className="border p-6 rounded-lg">
+                        <h4 className="text-lg font-semibold mb-4 capitalize border-b pb-2">
+                          {category.replace(/([A-Z])/g, " $1")}
+                        </h4>
+                        <div className="space-y-4">
+                          {prices.map((item, index) => (
+                            <div
+                              key={index}
+                              className="flex justify-between items-center"
+                            >
+                              <div>
+                                <p className="font-medium text-gray-800">
+                                  {item.capacity}
+                                </p>
+                                <p className="text-sm text-gray-500">
+                                  {item.rating}
+                                </p>
+                              </div>
+                              <span className="font-semibold text-red-600">
+                                {item.price}
+                              </span>
                             </div>
-                            <span className="font-semibold text-red-600">
-                              {item.price}
-                            </span>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
               </div>
             )}
@@ -641,7 +879,9 @@ export const ProductSpecifications: React.FC<ProductSpecificationsProps> = ({
               <div className="bg-yellow-50 p-8 rounded-xl">
                 <div className="flex items-center mb-6">
                   <SectionIcon icon={Shield} className="text-yellow-600" />
-                  <h3 className="text-2xl font-bold text-gray-900">Rental Benefits</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    Rental Benefits
+                  </h3>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   {productSpecs.benefitsOfRenting.map((benefit, index) => (
@@ -661,34 +901,14 @@ export const ProductSpecifications: React.FC<ProductSpecificationsProps> = ({
               <div className="bg-gray-50 p-8 rounded-xl">
                 <div className="flex items-center mb-6">
                   <SectionIcon icon={Info} className="text-gray-600" />
-                  <h3 className="text-2xl font-bold text-gray-900">Service Coverage</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    Service Coverage
+                  </h3>
                 </div>
                 <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
                   {productSpecs.serviceAreas.map((area, index) => (
                     <div key={index} className="text-gray-700 mb-2">
                       • {area}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* FAQ Section */}
-            {productSpecs.faqs && (
-              <div className="border rounded-xl overflow-hidden">
-                <div className="bg-gray-100 p-6">
-                  <div className="flex items-center">
-                    <SectionIcon icon={AlertCircle} className="text-gray-600" />
-                    <h3 className="text-2xl font-bold text-gray-900">Common Questions</h3>
-                  </div>
-                </div>
-                <div className="p-6">
-                  {productSpecs.faqs.map((faq, index) => (
-                    <div key={index} className="py-4 border-b last:border-0">
-                      <h4 className="font-semibold text-gray-900 mb-2">
-                        {faq.question}
-                      </h4>
-                      <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
                     </div>
                   ))}
                 </div>
@@ -701,7 +921,9 @@ export const ProductSpecifications: React.FC<ProductSpecificationsProps> = ({
                 <div className="bg-gray-100 p-6">
                   <div className="flex items-center">
                     <SectionIcon icon={AlertCircle} className="text-gray-600" />
-                    <h3 className="text-2xl font-bold text-gray-900">Terms & Conditions</h3>
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      Terms & Conditions
+                    </h3>
                   </div>
                 </div>
                 <div className="p-6 space-y-8">
@@ -712,8 +934,63 @@ export const ProductSpecifications: React.FC<ProductSpecificationsProps> = ({
                       </h4>
                       <ul className="space-y-2">
                         {term.content.map((item, idx) => (
-                          <li key={idx} className="text-gray-600 flex items-start">
+                          <li
+                            key={idx}
+                            className="text-gray-600 flex items-start"
+                          >
                             <span className="mr-2">•</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {/* FAQ Section */}
+            {productSpecs?.faqs?.length > 0 && (
+              <div className="border rounded-xl overflow-hidden">
+                <div className="bg-gray-100 p-6">
+                  <div className="flex items-center">
+                    <SectionIcon icon={AlertCircle} className="text-gray-600" />
+                    <h3 className="text-2xl font-bold text-gray-900">FAQS</h3>
+                  </div>
+                </div>
+                <div className="p-6">
+                  {productSpecs.faqs.map((faq, index) => (
+                    <div key={index} className="py-4 border-b last:border-0">
+                      <h4 className="font-semibold text-gray-900 mb-2">
+                        {faq.question}
+                      </h4>
+                      <p className="text-gray-600 leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {/* Checkist */}
+            {productSpecs?.Checklist?.length > 0 && (
+              <div className="border rounded-xl overflow-hidden shadow-sm">
+                <div className="bg-gray-100 p-6 border-b">
+                  <div className="flex items-center space-x-2">
+                    <SectionIcon icon={AlertCircle} className="text-gray-600" />
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      Checklist
+                    </h3>
+                  </div>
+                </div>
+                <div className="p-6 space-y-4">
+                  {productSpecs.Checklist.map((checklistItem, index) => (
+                    <div key={index} className="border-b last:border-0 pb-4">
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                        {checklistItem.title}
+                      </h4>
+                      <ul className="list-disc list-inside text-gray-600 space-y-1">
+                        {checklistItem.content.map((item, i) => (
+                          <li key={i} className="leading-relaxed">
                             {item}
                           </li>
                         ))}
